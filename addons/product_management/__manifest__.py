@@ -8,11 +8,11 @@
         A product management system for tracking products, suppliers, inventory, and transactions.
     """,
     'author': 'Edin Abdiu',
-    'depends': ['base',],
+    'depends': ['base','sale_management', 'website_sale'],
     'data': [
         'views/product_views.xml',
         'security/ir.model.access.csv',
     ],
     'installable': True,
-    'application': True,
+    'application': False,
 }
