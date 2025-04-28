@@ -3,6 +3,7 @@ git clone https://github.com/odoo/odoo.git --depth 1 --branch 18.0 odoo
 
 ### Compose only addons ####
 docker-compose -f docker-compose.yml up --build
+docker-compose -f docker-compose.yml up
 
 docker-compose down 
 

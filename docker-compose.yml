@@ -13,10 +13,10 @@ services:
       - ./addons:/mnt/extra-addons
     environment:
       - DB_USER=odoo
-      - DB_PASSWORD=openpgpwd  # Directly set the database password here
+      - DB_PASSWORD=openpgpwd
       - DB_HOST=db
       - DB_PORT=5432
-    command: ["odoo", "-c", "/etc/odoo/odoo.conf"] 
+    command: ["odoo", "-c", "/etc/odoo/odoo.conf"]
 
   db:
     image: postgres:latest
@@ -24,13 +24,13 @@ services:
       - "5432:5432"
     environment:
       - POSTGRES_DB=postgres
-      - POSTGRES_PASSWORD=openpgpwd  # Set the same password here
+      - POSTGRES_PASSWORD=openpgpwd
       - POSTGRES_USER=odoo
       - PGDATA=/var/lib/postgresql/data/pgdata
     restart: always
     volumes:
-      - odoo-db-data:/var/lib/postgresql/data/pgdata
+      - odoo-db-data:/var/lib/postgresql/data  
 
 volumes:
   odoo-web-data:
-  odoo-db-data:
+  odoo-db-data: 
