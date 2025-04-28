@@ -1,1 +1,1 @@
-# odoo-schnuppe-proj
+# odop-blank-proj

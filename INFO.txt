@@ -1,0 +1,38 @@
+### Git Clone odoo 18 ###
+git clone https://github.com/odoo/odoo.git --depth 1 --branch 18.0 odoo
+
+### Compose only addons ####
+docker-compose -f docker-compose.yml up --build
+
+### Prune Volumes ###
+docker volume prune -f
+
+### Vrtual Env ###
+python -m venv venv
+.\venv\Scripts\activate
+pip install --upgrade pip
+pip install -r requirements.txt
+
+
+#### Master Password ####
+xag7-bfr8-3uzj
+
+## Db Name ##
+odoo_test_db
+
+#### Email #####
+edinabdiu@gmail.com
+
+#### Password ####
+admin
+
+### Module Scaffolding ###
+python odoo-bin scaffold test ../addons/    
+
+### product_management ###
+python odoo-bin scaffold product_management ../addons/ 
+
+### tech shop ###
+python odoo-bin scaffold tech_shop ../addons/ 
+
+http://localhost:8069/
