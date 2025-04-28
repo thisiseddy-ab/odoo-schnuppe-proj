@@ -10,7 +10,7 @@
     'author': 'Edin Abdiu',
     'depends': ['base','sale_management', 'website','website_sale'],
     'data': [
-        'views/product_views.xml',
+        'views/product_tempalte_views.xml',
         'views/website_view.xml',
         'security/ir.model.access.csv',
     ],

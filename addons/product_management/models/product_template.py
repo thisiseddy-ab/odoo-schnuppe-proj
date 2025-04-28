@@ -1,6 +1,6 @@
 from odoo import models, fields
 
-class ProductProduct(models.Model):
+class ProductTemplate(models.Model):
     _inherit = 'product.template'
 
     ### Custom Fields ###
@@ -10,7 +10,7 @@ class ProductProduct(models.Model):
         help="Chose is it should be visible in Shop Front End"
     )
     
-    buisness_type = fields.Selection(
+    shop_type = fields.Selection(
         [
             ('b2c', 'B2C - Privatkunden-Shop'), ('b2b', 'B2B - Buisnesskunden-Shop')
         ], 

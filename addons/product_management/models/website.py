@@ -1,7 +1,7 @@
 from odoo import models, fields
 
 class Website(models.Model):
-    _inherit = 'website'  # Corrected the typo
+    _inherit = 'website'
   
     shop_type = fields.Selection(
         [
