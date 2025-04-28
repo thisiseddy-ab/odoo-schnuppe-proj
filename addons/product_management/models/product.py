@@ -1,7 +1,7 @@
 from odoo import models, fields
 
 class ProductProduct(models.Model):
-    _inherit = 'product.product'
+    _inherit = 'product.template'
 
     ### Custom Fields ###
     shop_visibility = fields.Boolean(
