@@ -38,4 +38,5 @@ python odoo-bin scaffold product_management ../addons/
 ### tech shop ###
 python odoo-bin scaffold tech_shop ../addons/ 
 
-http://localhost:8069/
+## db manager ##
+http://localhost:8069/web/database/manager
