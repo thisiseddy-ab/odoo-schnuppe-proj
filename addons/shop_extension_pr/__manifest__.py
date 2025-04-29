@@ -1,16 +1,17 @@
 # -*- coding: utf-8 -*-
 {
-    'name': 'Product Extension',
+    'name': 'Shop Extension (Products)',
     'version': '1.0',
     'category': 'Inventory',
-    'summary': 'Manage Products, Suppliers, Inventory, and Transactions',
+    'summary': 'Manage Products, Website and Shop Visibility',
+    
     'description': """
-        A product management system for tracking products, suppliers, inventory, and transactions.
+        A module to manage products visibility in the shop.
     """,
     'author': 'Edin Abdiu',
     'depends': ['base','sale_management', 'website','website_sale'],
     'data': [
-        'views/product_views.xml',
+        'views/product_view.xml',
         'views/website_view.xml',
         'security/ir.model.access.csv',
     ],
