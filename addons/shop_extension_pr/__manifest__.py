@@ -3,10 +3,10 @@
     'name': 'Shop Extension (Products)',
     'version': '1.0',
     'category': 'Inventory',
-    'summary': 'Manage Products, Suppliers, Inventory, and Transactions',
+    'summary': 'Manage Products, Website and Shop Visibility',
     
     'description': """
-        A product management system for tracking products, suppliers, inventory, and transactions.
+        A module to manage products visibility in the shop.
     """,
     'author': 'Edin Abdiu',
     'depends': ['base','sale_management', 'website','website_sale'],
