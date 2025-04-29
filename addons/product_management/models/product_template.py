@@ -4,18 +4,12 @@ class ProductTemplate(models.Model):
     _inherit = 'product.template'
 
     ### Custom Fields ###
-    shop_visibility = fields.Boolean(
-        String="Shoop Visibility", 
-        default=False,
-        help="Chose is it should be visible in Shop Front End"
-    )
-    
-    shop_type = fields.Selection(
+    shop_visibility = fields.Selection(
         [
-            ('b2c', 'B2C - Privatkunden-Shop'), ('b2b', 'B2B - Buisnesskunden-Shop')
+            ('b2c', 'B2C - Privat CLients Shop'), ('b2b', 'B2B - Buisness Clients Shop ')
         ], 
-        string='Shoop Type', 
+        string='Shop Vsibility', 
         default='b2c',
-        help="Chose the Buisness Type B2C or B2B"
+        help="Chose the Shop Visibility Type B2C or B2B"
     )
     

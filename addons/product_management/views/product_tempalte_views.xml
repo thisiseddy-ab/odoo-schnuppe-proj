@@ -7,7 +7,6 @@
             <xpath expr="//field[@name='categ_id']" position="after">
                 <group string="Shop Settings">
                     <field name="shop_visibility"/>
-                    <field name="shop_type"/>
                 </group>
             </xpath>
         </field>

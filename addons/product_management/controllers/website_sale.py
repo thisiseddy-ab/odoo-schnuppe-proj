@@ -56,6 +56,6 @@ class WebsiteSaleExtend(WebsiteSale):
         shop_type = website.shop_type
         
         if shop_type:
-            search_product = search_product.filtered(lambda p: p.shop_type == shop_type and p.shop_visibility)
+            search_product = search_product.filtered(lambda p: p.shop_visibility == shop_type)
 
         return fuzzy_search_term, len(search_product), search_product

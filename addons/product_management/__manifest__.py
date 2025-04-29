@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
 {
-    'name': 'Product Extension',
+    'name': 'Shop Extension (Products)',
     'version': '1.0',
     'category': 'Inventory',
     'summary': 'Manage Products, Suppliers, Inventory, and Transactions',
+    
     'description': """
         A product management system for tracking products, suppliers, inventory, and transactions.
     """,

@@ -5,10 +5,10 @@ class Website(models.Model):
   
     shop_type = fields.Selection(
         [
-            ('b2c', 'B2C - Privatkunden-Shop'), ('b2b', 'B2B - Buisnesskunden-Shop')
+            ('b2c', 'B2C - Privat CLients Shop'), ('b2b', 'B2B - Buisness Clients Shop ')
         ], 
-        string='Shoop Type', 
+        string='Shop Type', 
         default='b2c',
-        help="Chose the Buisness Type B2C or B2B"
+        help="Chose the Shop Type B2C or B2B"
     )
     
