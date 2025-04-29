@@ -13,7 +13,6 @@
     'data': [
         'views/product_view.xml',
         'views/website_view.xml',
-        #'views/website_sale_product_inherit.xml',
         'security/ir.model.access.csv',
     ],
     'installable': True,
