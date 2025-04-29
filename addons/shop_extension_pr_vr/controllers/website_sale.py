@@ -5,11 +5,11 @@ from odoo.http import request
 from werkzeug.exceptions import NotFound
 
 
-'''
+#'''
 ## Test Log##
 import logging
 _logger = logging.getLogger(__name__)
-'''
+#'''
 
 class WebsiteSaleExtend(WebsiteSale):
 
@@ -54,10 +54,53 @@ class WebsiteSaleExtend(WebsiteSale):
 
         website = request.env['website'].get_current_website()
         shop_type = website.shop_type
-        
+
         if shop_type:
-            search_product = search_product.filtered(lambda p: p.shop_visibility == shop_type)
+            filtered_products = []
+            for template in search_product:
+                # Check if any variant matches
+                variants = template.product_variant_ids.filtered(lambda p: p.shop_visibility in [shop_type, 'both'])
+                if variants:
+                    filtered_products.append(template)
+            
+            search_product = request.env['product.template'].browse([p.id for p in filtered_products])
 
         return fuzzy_search_term, len(search_product), search_product
-    
-    
+        
+    '''
+    @http.route(['/shop/<model("product.template"):product>'], type='http', auth="public", website=True)
+    def product(self, product, category='', search='', **kwargs):
+        website = request.env['website'].get_current_website()
+        shop_type = website.shop_type
+
+        # Call default method first
+        values = super()._prepare_product_values(product, category, search, **kwargs)
+
+        # Now safely patch the result (in-memory)
+        display_product = values['product'].with_prefetch(values['product']._prefetch_ids)
+
+        # Filter variants
+        filtered_variants = display_product.product_variant_ids.filtered(
+            lambda v: v.shop_visibility in [shop_type, 'both']
+        )
+
+        # Filter attribute lines
+        allowed_value_ids = filtered_variants.mapped(
+            'product_template_attribute_value_ids.product_attribute_value_id.id'
+        )
+        filtered_attribute_lines = display_product.attribute_line_ids.filtered(
+            lambda line: any(val.id in allowed_value_ids for val in line.value_ids)
+        )
+
+        # Patch in-memory (important: after super())
+        object.__setattr__(display_product, 'product_variant_ids', filtered_variants)
+        object.__setattr__(display_product, 'attribute_line_ids', filtered_attribute_lines)
+
+        # Replace in the values dict
+        values['product'] = display_product
+        values['main_object'] = display_product  # also used in templates
+        _logger.info("I'm HERE")
+
+
+        return request.render("website_sale.product", values)
+    '''
