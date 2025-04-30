@@ -4,11 +4,11 @@ from odoo import http
 from werkzeug.exceptions import NotFound
 
 
-'''
-## Test Log##
+#'''
+ ## Test Log##
 import logging
 _logger = logging.getLogger(__name__)
-'''
+#'''
 
 class WebsiteSaleExtend(WebsiteSale):
     
@@ -60,3 +60,57 @@ class WebsiteSaleExtend(WebsiteSale):
             search_product = http.request.env['product.template'].browse([p.id for p in filtered_products])
 
         return fuzzy_search_term, len(search_product), search_product
+    
+    '''
+    @http.route(['/shop/<model("product.template"):product>'], type='http', auth="public", website=True, sitemap=WebsiteSale.sitemap_products, readonly=True)
+    def product(self, product, category='', search='', **kwargs):
+        if not http.request.website.has_ecommerce_access():
+            return http.request.redirect('/web/login')
+
+        website = http.request.env['website'].get_current_website()
+        shop_type = website.shop_type
+
+        # Filter variants (don't modify original product)
+        visible_variants = product.product_variant_ids.filtered(
+            lambda p: p.shop_visibility in [shop_type, 'both']
+        )
+
+        # Optional: redirect if no visible variants
+        if not visible_variants:
+            return http.request.redirect('/shop')
+
+        # Create a temporary in-memory copy of the product with filtered variants
+        product_with_filtered_variants = product.with_context(
+            override_visible_variants=visible_variants.ids
+        )
+
+        # Inside _prepare_product_values you will check this context
+        product_values = super()._prepare_product_values(product_with_filtered_variants, category, search, **kwargs)
+
+        return http.request.render("website_sale.product", product_values)
+    
+    '''
+    '''
+    
+    @http.route(['/shop/<model("product.template"):product>'], type='http', auth="public", website=True, sitemap=True)
+    def product(self, product, category='', search='', **kwargs):
+        if not http.request.website.has_ecommerce_access():
+            return http.request.redirect('/web/login')
+
+        product_values = self._prepare_product_values(product, category, search, **kwargs)
+        return http.request.render("website_sale.product", product_values)
+
+    def _prepare_product_values(self, product, category, search, **kwargs):
+        product = product.with_context(website_shop_filter=True)
+
+        values = super()._prepare_product_values(product, category, search, **kwargs)
+
+        # Overwrite both product references
+        values['product'] = product
+        values['main_object'] = product
+
+        # Inject filtered attribute lines if you hide some variants
+        values['visible_attribute_lines'] = product._get_filtered_attribute_lines_for_website()
+
+        return values
+    '''

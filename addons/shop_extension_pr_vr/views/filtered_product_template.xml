@@ -1,0 +1,12 @@
+<odoo>
+  <template id="shop_extension_pr_vr.product_override" inherit_id="website_sale.product">
+    <xpath expr="//t[@t-call='website_sale.variants']" position="replace">
+      <t t-call="shop_extension_pr_vr.filtered_variants_template">
+        <t t-set="ul_class" t-valuef="flex-column"/>
+        <t t-set="parent_combination" t-value="None"/>
+        <t t-set="combination" t-value="combination_info['combination']"/>
+        <t t-set="visible_attribute_lines" t-value="product._get_filtered_attribute_lines_for_website()"/>
+      </t>
+    </xpath>
+  </template>
+</odoo>
