@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 {
-    'name': 'Shop Extension (Products Variant)',
+    'name': 'Shop Extension Abstract',
     'version': '1.0',
     'category': 'Inventory',
     'summary': 'Manage Products, Website and Shop Visibility',
@@ -18,8 +18,8 @@
     'data': [
         'views/product_view.xml',
         'views/website_view.xml',
-        'views/filtered_variants_template.xml',
-        'views/filtered_product_template.xml',
+        #'views/filtered_variants_template.xml',
+        #'views/filtered_product_template.xml',
         'security/ir.model.access.csv',
     ],
     'installable': True,

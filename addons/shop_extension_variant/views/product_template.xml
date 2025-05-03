@@ -1,0 +1,7 @@
+<odoo>
+  <template id="product_with_filtered_variants" inherit_id="website_sale.product" priority="100">
+    <xpath expr="//t[@t-call='website_sale.variants']" position="replace">
+      <t t-call="shop_extension_variant.variants_filtered_full"/>
+    </xpath>
+  </template>
+</odoo>
